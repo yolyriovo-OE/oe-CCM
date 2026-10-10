@@ -405,8 +405,10 @@ app.post("/api/admin/no-graduados", need("admin"), upload.single("archivo"), wra
 
 /* ---------- estáticos y errores ---------- */
 app.get("/health", (_req, res) => res.json({ ok: true }));
-app.use(express.static(path.join(__dirname, "..", "public"), { index: "index.html" }));
-app.get(/^\/(?!api|auth).*/, (_req, res) => res.sendFile(path.join(__dirname, "..", "public", "index.html")));
+// Archivos públicos: solo estos se sirven (el código del servidor vive en la misma carpeta y no se expone)
+const PUBLICOS = { "/app.js": "app.js", "/styles.css": "styles.css", "/logo-openenglish.png": "logo-openenglish.png", "/logo-openenglish-dark.png": "logo-openenglish-dark.png" };
+app.get(Object.keys(PUBLICOS), (req, res) => res.sendFile(path.join(__dirname, PUBLICOS[req.path])));
+app.get(/^\/(?!api|auth).*/, (_req, res) => res.sendFile(path.join(__dirname, "index.html")));
 app.use((err, _req, res, _next) => {
   const status = err.status || (err.code === "LIMIT_FILE_SIZE" ? 413 : 500);
   if (status >= 500) console.error(err);

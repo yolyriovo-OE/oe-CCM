@@ -2,15 +2,15 @@
   "name": "ruta-del-asesor",
   "version": "1.0.0",
   "description": "Open English · Training administrativo: screening de hojas de vida con IA, alertas por equipo y libro de ingresos.",
-  "main": "src/index.js",
+  "main": "index.js",
   "type": "commonjs",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "NODE_ENV=development DEV_LOGIN=1 node src/index.js",
-    "test": "node --test test/*.test.js"
+    "start": "node index.js",
+    "dev": "NODE_ENV=development DEV_LOGIN=1 node index.js",
+    "test": "node --test rules.test.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "0.60.0",

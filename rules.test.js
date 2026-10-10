@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert");
-const R = require("../src/rules");
+const R = require("./rules");
 
 const emptyCtx = () => ({ hc: new Map(), ng: new Map(), desbloqueos: new Map(), waves: new Map(), candidatos: new Map() });
 const perfil = { equipo: "Adultos", must: ["Mínimo 1 año en ventas", "Bachiller completo"], consistencia_meses: 12 };

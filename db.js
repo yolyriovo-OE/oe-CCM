@@ -3,13 +3,10 @@ const path = require("path");
 const { Pool } = require("pg");
 const { PERFIL_ADULTOS } = require("./constants");
 
-const url = process.env.DATABASE_URL;
-if (!url) {
-  console.error("Falta DATABASE_URL. En Railway agrega un servicio Postgres y referencia su DATABASE_URL.");
-  process.exit(1);
-}
+const url = process.env.DATABASE_URL || "";
+// En Railway la red privada (postgres.railway.internal) no usa SSL; el proxy público sí puede pedirlo.
 const ssl = /sslmode=require/.test(url) || process.env.PGSSL === "1" ? { rejectUnauthorized: false } : false;
-const pool = new Pool({ connectionString: url, ssl, max: 10 });
+const pool = url ? new Pool({ connectionString: url, ssl, max: 10, connectionTimeoutMillis: 10000 }) : null;
 
 const q = (text, params) => pool.query(text, params);
 

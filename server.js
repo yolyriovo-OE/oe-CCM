@@ -19,7 +19,6 @@ const DOMAIN = (process.env.ALLOWED_DOMAIN || "openenglish.com").toLowerCase();
 const ADMINS = (process.env.ADMIN_EMAILS || "").split(/[,\s]+/).map((s) => s.trim().toLowerCase()).filter(Boolean);
 const GOOGLE_ID = process.env.GOOGLE_CLIENT_ID || "";
 const DEV_LOGIN = !PROD && process.env.DEV_LOGIN === "1";
-if (PROD && !process.env.SESSION_SECRET) { console.error("Falta SESSION_SECRET."); process.exit(1); }
 
 const app = express();
 app.set("trust proxy", 1);
@@ -415,9 +414,4 @@ app.use((err, _req, res, _next) => {
   res.status(status).json({ error: msg });
 });
 
-const PORT = process.env.PORT || 3000;
-migrate()
-  .then(() => app.listen(PORT, () => console.log(`Ruta del Asesor escuchando en :${PORT}`)))
-  .catch((e) => { console.error("Error migrando la base:", e); process.exit(1); });
-
-module.exports = app;
+module.exports = { app, migrate };

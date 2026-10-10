@@ -41,6 +41,11 @@ Crea un repositorio privado (por ejemplo `ruta-del-asesor`) y sube esta carpeta.
 3. En el servicio de la app, ve a **Variables** y agrega `DATABASE_URL` como referencia a la variable `DATABASE_URL` del Postgres.
 4. En **Settings → Networking**, genera un dominio público (por ejemplo `ruta-del-asesor.up.railway.app`).
 
+### Si el servicio aparece como "Crashed"
+Abre la URL pública de la app: si falta configuración, la página dice exactamente qué variable falta o por qué no conecta la base. Lo más común:
+- `DATABASE_URL` no está creada como referencia al Postgres (`${{Postgres.DATABASE_URL}}`) o el Postgres está en otro proyecto.
+- El `package.json` no está en la raíz del repositorio. Si el código quedó dentro de una carpeta, ve a **Settings → Root Directory** y escribe el nombre de esa carpeta.
+
 ### 3. Variables de entorno
 
 | Variable | Obligatoria | Qué es |

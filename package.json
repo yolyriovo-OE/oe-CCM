@@ -2,14 +2,14 @@
   "name": "ruta-del-asesor",
   "version": "1.0.0",
   "description": "Open English · Training administrativo: screening de hojas de vida con IA, alertas por equipo y libro de ingresos.",
-  "main": "src/server.js",
+  "main": "src/index.js",
   "type": "commonjs",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "NODE_ENV=development DEV_LOGIN=1 node src/server.js",
+    "start": "node src/index.js",
+    "dev": "NODE_ENV=development DEV_LOGIN=1 node src/index.js",
     "test": "node --test test/*.test.js"
   },
   "dependencies": {
